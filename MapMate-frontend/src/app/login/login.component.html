@@ -1,0 +1,45 @@
+<div id="login-wrapper">
+    <div class="image-wrapper">
+        <div class="logo-image"></div>
+    </div>
+    <div class="form-wrapper">
+        <div class="form-title">Welcome Back!</div>
+        <div class="form-description">Login to your existing account</div>
+        <form [formGroup]="loginForm" class="login-form-wrapper">
+            <!-- Email Input Field -->
+            <div class="label">Email</div>
+            <mat-form-field 
+                class="text-field email-address"
+                appearance="outline">
+                    <input matInput placeholder="Email" formControlName="email">
+                    @if (loginForm.controls.email.hasError('email') || loginForm.controls.email.hasError('required')) {
+                        <mat-error>Please enter a valid email address</mat-error>
+                    }
+            </mat-form-field>
+
+            <!-- Password Field -->
+            <div class="label">Password</div>
+            <mat-form-field 
+                class="text-field password"
+                appearance="outline">
+                    <input [type]="hidePassword ? 'password' : 'text'" placeholder="Password" matInput formControlName="password">
+                    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    @if (loginForm.controls.password.hasError('required')) {
+                        <mat-error>Please enter a password</mat-error>
+                    }
+            </mat-form-field>
+
+            <div class="btn-wrapper">
+                <button class="submit-btn" mat-flat-button (click)="submit()">Sign In</button>
+            </div>
+
+            <div class="no-account"> Don't have an account? <span class="sign-up-now" (click)="goToSignup()">Sign up now</span></div>
+            <div class="divider"></div>
+            <div class="sso-text">Or continue with</div>
+            <div class="social-logo-wrapper">
+                <button mat-fab class="google-logo logo"></button>
+                <button mat-fab class="apple-logo logo"></button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div id="signup-wrapper">
+    <div class="image-wrapper">
+        <div class="logo-image"></div>
+    </div>
+    <div class="form-wrapper">
+        <div class="form-title">Welcome to MapMate!</div>
+        <div class="form-description">Create an account to get started</div>
+        <form [formGroup]="signupForm" class="signup-form-wrapper">
+            <!-- Full Name Field -->
+            <div class="label">Name</div>
+            <mat-form-field 
+                class="text-field full-name"
+                appearance="outline">
+                    <input matInput placeholder="Enter your full name" formControlName="fullName">
+                    @if (signupForm.controls.fullName.hasError('required')) {
+                        <mat-error>Name is required</mat-error>
+                    }
+            </mat-form-field>
+
+            <!-- Email Input Field -->
+            <div class="label">Email</div>
+            <mat-form-field 
+                class="text-field email-address"
+                appearance="outline">
+                    <input matInput placeholder="Email" formControlName="email">
+                    @if (signupForm.controls.email.hasError('email') || signupForm.controls.email.hasError('required')) {
+                        <mat-error>Please enter a valid email address</mat-error>
+                    }
+            </mat-form-field>
+    
+            <!-- Password Field -->
+            <div class="label">Password</div>
+            <mat-form-field 
+                class="text-field password"
+                appearance="outline">
+                    <input [type]="hidePassword ? 'password' : 'text'" placeholder="Create a password" matInput formControlName="password">
+                    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    @if (signupForm.controls.password.hasError('required')) {
+                        <mat-error>Please enter a password</mat-error>
+                    }
+            </mat-form-field>
+
+            <!-- Confirm Password Field -->
+            <mat-form-field 
+                class="text-field password"
+                appearance="outline">
+                    <input [type]="hideConfirmPassword ? 'password' : 'text'" placeholder="Confirm password" matInput formControlName="confirmPassword">
+                    <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    @if (signupForm.controls.confirmPassword.hasError('required')) {
+                        <mat-error>Please re-enter the password</mat-error>
+                    }
+                    @if (signupForm.controls.confirmPassword.hasError('not_matching')) {
+                        <mat-error>Password doesn't match</mat-error>
+                    }
+            </mat-form-field>
+
+            <mat-checkbox class="agreement-chkbox" formControlName="agreement">I've read and agree with the Terms and Conditions and the Privacy Policy.</mat-checkbox>
+            @if (not_agreed) {
+                <mat-error class="error-message">Please read and agree</mat-error>
+            }
+    
+            <div class="btn-wrapper">
+                <button class="submit-btn" mat-flat-button (click)="submit()">Sign Up</button>
+            </div>
+    
+            <div class="no-account"> Already a member? <span class="sign-up-now" (click)="goToSignin()">Sign in now</span></div>
+            <div class="divider"></div>
+            <div class="sso-text">Or continue with</div>
+            <div class="social-logo-wrapper">
+                <button mat-fab class="google-logo logo"></button>
+                <button mat-fab class="apple-logo logo"></button>
+            </div>
+        </form>
+    </div>
+</div>

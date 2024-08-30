@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body, main{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-family: "Poppins";
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+
+.mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 15px !important;
+}
